@@ -1,8 +1,14 @@
-import pyodbc 
-server = 'localhost' 
-database = 'master' 
-username = 'sa' 
-password = 'Your_password123' 
-cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='
-    +database+';UID='+username+';PWD='+ password)
-cursor = cnxn.cursor()
+import pymysql.cursors
+
+# Connect to the database
+connection = pymysql.connect(host='localhost',
+                             user='root',
+                             password='teste123',
+                             database='mysql',
+                             cursorclass=pymysql.cursors.DictCursor)
+
+with connection:
+    with connection.cursor() as cursor:
+        # Create a new record
+        sql = "SELECT * from enem.PARTICIPANTE"
+        cursor.execute(sql)
